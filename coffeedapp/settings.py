@@ -16,6 +16,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MAIN_DIR = os.path.dirname(os.path.dirname(__file__))
 
+# Chris - ensure Django is aware when he is on Heroku
+ON_HEROKU = os.environ.get('ON_HEROKU')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -37,8 +40,11 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', 
+    'core',
 )
+
+# we added the last 2 lines
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,16 +81,25 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# Chris - now we check if we are on Heroku
+if ON_HEROKU == True:
+
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+
+else: 
+    # else we use local sqlite database
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+    
 
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

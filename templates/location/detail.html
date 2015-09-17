@@ -1,0 +1,19 @@
+{% extends "base/theme.html" %}
+<!-- {% load staticfiles %}
+<link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet"> 
+Now we the extend these 2 lines are already included
+-->
+
+{% block main_content %}
+
+<div class="row main-content">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class='panel'>
+		<h3>{{ location.title }}</h3>
+		<p>{{ location.description }}</p>
+		</div>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+{% endblock %}
