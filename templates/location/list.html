@@ -10,8 +10,17 @@ Now we the extend these 2 lines are already included
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 	{% for location in object_list %}
-		<div class='panel'>
+<!-- 		<div class='panel'> 
+commented to remove the box around this zone
+ -->		
+ 	<div class=''> 
 		<h3><a href="{{ location.get_absolute_url }}">{{ location.title }}</a></h3>
+{% if location.address %}
+		<p><b>Location:</b> {{ location.address }}</p>
+{% endif %}
+{% if location.address %}
+		<p>{{ location.hours }}</p>
+{% endif %}
 		<p>{{ location.description }}</p>
 		</div>
 	{% endfor %}

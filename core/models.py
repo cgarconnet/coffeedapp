@@ -9,6 +9,8 @@ from django.core.urlresolvers import reverse
 class Location(models.Model):
 	title = models.CharField(max_length=300)
  	description = models.TextField(null=True, blank=True) 
+ 	address = models.TextField(null=True, blank=True) 
+ 	hours = models.TextField(null=True, blank=True) 
  	created_at = models.DateTimeField(auto_now_add=True)
 
  	def __unicode__(self):
