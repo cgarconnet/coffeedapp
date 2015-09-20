@@ -18,10 +18,15 @@ commented to remove the box around this zone
 {% if location.address %}
 		<p><b>Location:</b> {{ location.address }}</p>
 {% endif %}
+
 {% if location.address %}
 		<p>{{ location.hours }}</p>
 {% endif %}
 		<p>{{ location.description }}</p>
+
+{% if location.image_file %}
+		<img class="img-responsive" src="{{ location.image_file.url }}"></img>
+{% endif %}
 		</div>
 	{% endfor %}
 	</div>
