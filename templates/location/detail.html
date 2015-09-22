@@ -12,6 +12,9 @@ Now we the extend these 2 lines are already included
 		<div class='panel'>
 		<h3>{{ location.title }}</h3>
 		<p>{{ location.description }}</p>
+		{% if location.image_file %}
+		<img class="img-responsive" src="{{ location.image_file.url }}"></img>
+		{% endif %}
 		</div>
 	</div>
 	<div class="col-md-2"></div>

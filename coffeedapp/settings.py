@@ -138,12 +138,10 @@ STATICFILES_DIRS = (
 
 # Lines below should be activated for Amazon Web Services
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-# AWS_S3_FORCE_HTTP_URL = True
-# AWS_QUERYSTRING_AUTH = False
-# AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
-# AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
-# AWS_STORAGE_BUCKET_NAME = 'pythoncgarconnet'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_FORCE_HTTP_URL = True
+AWS_QUERYSTRING_AUTH = False
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
+AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
 
-
-FTP_STORAGE_LOCATION = '[a]ftp://python:py#thon@ftp.garconnet.ch/images'
+AWS_STORAGE_BUCKET_NAME = 'onemonthpythongarconnet'
