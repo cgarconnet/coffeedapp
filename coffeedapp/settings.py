@@ -86,7 +86,9 @@ if ON_HEROKU == True:
 
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
+    # DATABASES['default'] = dj_database_url.config()
+    DATABASES = {'default' : dj_database_url.config()}
+
 
 else: 
     # else we use local sqlite database
