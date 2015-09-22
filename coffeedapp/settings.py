@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'coffeedapp.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 # Chris - now we check if we are on Heroku
-if ON_HEROKU == True:
+if ON_HEROKU == '1':
 
     # Parse database configuration from $DATABASE_URL
     import dj_database_url
-    # DATABASES['default'] = dj_database_url.config()
-    DATABASES = {'default' : dj_database_url.config()}
+    DATABASES['default'] = dj_database_url.config()
+#    DATABASES = {'default' : dj_database_url.config()}
 
 
 else: 
