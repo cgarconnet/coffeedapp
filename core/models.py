@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
+from django.db.models import Avg
+
 
 import os
 import uuid
@@ -10,6 +13,16 @@ import uuid
 # class FTPTest(models.Model):
 # 	file = models.FileField(upload_to='a/b/c/', storage=fs)
 
+
+# we create a cateogry
+RATING_CHOICES = (
+	(0, 'None'),
+	(1, '*'),
+	(2, '**'),
+	(3, '***'),
+	(4, '****'),
+	(5, '*****'),
+	)
 
 def upload_to_location(instance, filename):
     blocks = filename.split('.')
@@ -31,6 +44,7 @@ class Location(models.Model):
  	image_file = models.ImageField(upload_to=upload_to_location, null=True, blank=True)
  	created_at = models.DateTimeField(auto_now_add=True)
 
+ 	# Code below allow us to define the title of the object in the Admin section
  	def __unicode__(self):
  		return self.title
  		
@@ -39,3 +53,25 @@ class Location(models.Model):
  		# instead use the core.urlresolvers
  		return reverse (viewname="location_list", args=[self.id])
 
+ 	def get_average_rating(self):
+ 		# django create a review_set if you have a Review class
+ 			average = self.review_set.all().aggregate(Avg('rating'))['rating__avg']
+ 			if average == None:
+ 				return average
+			else:
+				return int(average)
+
+	def get_reviews(self):
+		return self.review_set.all()
+		# this will return a list of reviews
+
+
+class Review(models.Model):
+	location = models.ForeignKey(Location)
+	user = models.ForeignKey(User)
+ 	description = models.TextField(null=True, blank=True)
+ 	rating = models.IntegerField(choices=RATING_CHOICES, null=True, blank=True)
+ 	created_at = models.DateTimeField(auto_now_add=True)
+ 
+  	def __unicode__(self):
+ 		return str(self.user) + ' / ' + self.created_at.strftime("%B %d, %Y") + ' / ' + str(self.rating)
