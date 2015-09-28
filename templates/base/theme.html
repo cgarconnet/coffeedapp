@@ -5,7 +5,21 @@
 	    <a class="page-scroll" href="/location">Find a Coffe Shop</a>
 	</li>
 
+	<li>
+	    <a class="page-scroll" href="/location/create">Add a Location</a>
+	</li>
+
 {% endblock %}
+
+{% block search %}
+<form action="/search/" class="navbar-form navbar-right" method="get">
+	<div class="form-group">
+	<input type="text" placeholder="Search" class="form-control" name="query"></input>
+	<!--  This query name will be the name of the GET in the url -->
+	</div>
+</form>
+{% endblock %}
+
 
 {% block main_content %}
 

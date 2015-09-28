@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# this is how we install an app into django
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -42,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     'core',
+    'widget_tweaks',
 )
 
 # we added the last 2 lines
