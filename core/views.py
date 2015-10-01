@@ -34,6 +34,20 @@ class LocationDetailView(DetailView):
 	template_name = "location/detail.html"
 	context_object_name = 'location'
 
+	def get_context_data(self, **kwargs):
+		# the reverse as form_valid. Modify data between extract from DB -> page
+		context = super(LocationDetailView, self).get_context_data(**kwargs)
+		location = coremodels.Location.objects.get(id=self.kwargs['pk'])
+
+		if self.request.user.is_authenticated():
+			user_reviews = coremodels.Review.objects.filter(location=location, user=self.request.user)
+			if user_reviews.count() > 0:
+				context['user_review'] = user_reviews[0]
+			else:
+				context['user_review'] = None
+		return context
+
+
 class LocationCreateView(CreateView):
 	model = coremodels.Location
 	template_name = 'base/form.html'
@@ -43,6 +57,7 @@ class LocationUpdateView(UpdateView):
 	model = coremodels.Location
 	template_name = 'base/form.html'
 	fields ="__all__"
+
 
 class ReviewCreateView(CreateView):
 	model = coremodels.Review # by just changing the model here, I can have access to the right form edit template
@@ -55,6 +70,20 @@ class ReviewCreateView(CreateView):
 		form.instance.user = self.request.user
 		form.instance.location = coremodels.Location.objects.get(id=self.kwargs['pk'])
 		return super(ReviewCreateView, self).form_valid(form)
+
+	def get_success_url(self): # returning the url of what we just edited
+		return self.object.location.get_absolute_url()
+
+
+class ReviewUpdateView(UpdateView):
+	model = coremodels.Review # by just changing the model here, I can have access to the right form edit template
+	template_name = 'base/form.html'
+	# fields ="__all__" this is when we want all fields, but in this case, we don't want the user nor the Location Id
+	fields = ['description', 'rating']
+
+	def get_object(self):
+		# return the review object for the current user and the current location
+		return coremodels.Review.objects.get(location__id=self.kwargs['pk'], user=self.request.user)
 
 	def get_success_url(self): # returning the url of what we just edited
 		return self.object.location.get_absolute_url()

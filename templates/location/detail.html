@@ -20,13 +20,22 @@ Now we the extend these 2 lines are already included
 			<div class="col-md-12">
 				{% if location.address %}<p><b>Location: </b>{{ location.address }}</p>{% endif %}
 				{% if location.hours %}<p>{{ location.hours }}</p>{% endif %}
+
+				{% include 'location/specifics.html' with location=location %}
+
+				
 				<p>{{ location.description }}</p>
 				{% if location.image_file %}
 				<img class="img-responsive" src="{{ location.image_file.url }}"></img>
 				{% endif %}
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-12">
 				<br><a type="button" href="{% url 'location_update' pk=location.id %}" class="btn btn-default pull-left">Edit</a>
+				{% if user_review %}
+				<a type="button" href="{% url 'review_update' pk=location.id %}" class="btn btn-default pull-left">Update Review</a>
+				{% else %}
+				<a type="button" href="{% url 'review_create' pk=location.id %}" class="btn btn-default pull-left">Create Review</a>
+				{% endif %}
 			</div>
 			<div class="col-md-12">
 				{% for review in location.get_reviews %}
