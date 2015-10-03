@@ -18,6 +18,7 @@ class LocationListView(ListView):
 	model = coremodels.Location
 	# template_name = "location/list.html"
 	template_name = "location/list.html"
+	paginate_by = 4 # definition of max py page
 
 
 class SearchListView(LocationListView):

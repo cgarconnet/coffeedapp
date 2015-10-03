@@ -27,7 +27,7 @@ ON_HEROKU = os.environ.get('ON_HEROKU')
 SECRET_KEY = '!!a*5oj$@*d3!vf^ltc27iq7=da^8ps31^kaax52w7jrp&(vi4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False # True during Testing
 
 ALLOWED_HOSTS = []
 
@@ -45,7 +45,9 @@ INSTALLED_APPS = (
     'core', #name of my app
     'widget_tweaks', # for managing the forms easier
     'sitegate', # to enable the sign-in
-    'bootstrap3',
+    'bootstrap3', # required by sitegate
+    'geoposition', # for google maps
+    'bootstrap_pagination', # for the pagination of our list
 )
 
 # we added the last 2 lines
@@ -74,6 +76,16 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+# added from bottom to avoid error message in Django 1.8
+# some may be redundant but copy/pasted as-is
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.debug',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request'
             ],
         },
     },
@@ -133,10 +145,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # commented to remove the warning message 1_8.W001 of Django
+# moved into TEMPLATES = [
 # TEMPLATE_DIRS = (
 #  os.path.join(MAIN_DIR, 'templates'),
 #  )
 
+LOGIN_URL = '/entrance'
 
 STATICFILES_DIRS = (
     os.path.join(MAIN_DIR, 'static'),
@@ -152,12 +166,15 @@ AWS_STORAGE_BUCKET_NAME = 'onemonthpythongarconnet'
 
 
 # added for authentification
-TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
-"django.core.context_processors.debug",
-"django.core.context_processors.i18n",
-"django.core.context_processors.media",
-"django.core.context_processors.static",
-"django.core.context_processors.tz",
-"django.contrib.messages.context_processors.messages",
-"django.core.context_processors.request"
-)
+# commented to remove the warning message 1_8.W001 of Django
+# moved to TEMPLATES = [
+
+# TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+# "django.core.context_processors.debug",
+# "django.core.context_processors.i18n",
+# "django.core.context_processors.media",
+# "django.core.context_processors.static",
+# "django.core.context_processors.tz",
+# "django.contrib.messages.context_processors.messages",
+# "django.core.context_processors.request"
+# )
