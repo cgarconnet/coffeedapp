@@ -27,9 +27,9 @@ ON_HEROKU = os.environ.get('ON_HEROKU')
 SECRET_KEY = '!!a*5oj$@*d3!vf^ltc27iq7=da^8ps31^kaax52w7jrp&(vi4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False # True during Testing
+DEBUG = True # True during Testing
 
-ALLOWED_HOSTS = ['localhost', 'coffeedapp.garconnet.ch']
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
