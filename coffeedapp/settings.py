@@ -29,7 +29,7 @@ SECRET_KEY = '!!a*5oj$@*d3!vf^ltc27iq7=da^8ps31^kaax52w7jrp&(vi4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False # True during Testing
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'coffeedapp.garconnet.ch']
 
 
 # Application definition
@@ -85,7 +85,7 @@ TEMPLATES = [
                 'django.core.context_processors.static',
                 'django.core.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request'
+                'django.core.context_processors.request',
             ],
         },
     },
