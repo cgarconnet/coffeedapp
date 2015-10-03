@@ -30,11 +30,15 @@ Now we the extend these 2 lines are already included
 				{% endif %}
 			</div>
 			<div class="col-md-12">
+				{% if user.is_authenticated and user.is_staff %}
 				<br><a type="button" href="{% url 'location_update' pk=location.id %}" class="btn btn-default pull-left">Edit</a>
-				{% if user_review %}
-				<a type="button" href="{% url 'review_update' pk=location.id %}" class="btn btn-default pull-left">Update Review</a>
-				{% else %}
-				<a type="button" href="{% url 'review_create' pk=location.id %}" class="btn btn-default pull-left">Create Review</a>
+				{% endif %}
+				{% if user.is_authenticated %}
+					{% if user_review %}
+					<a type="button" href="{% url 'review_update' pk=location.id %}" class="btn btn-default pull-left">Update Review</a>
+					{% else %}
+					<a type="button" href="{% url 'review_create' pk=location.id %}" class="btn btn-default pull-left">Create Review</a>
+					{% endif %}
 				{% endif %}
 			</div>
 			<div class="col-md-12">

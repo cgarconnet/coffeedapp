@@ -5,10 +5,15 @@
 	    <a class="page-scroll" href="/location">Find a Coffe Shop</a>
 	</li>
 
+	{% if user.is_authenticated %}
 	<li>
 	    <a class="page-scroll" href="/location/create">Add a Location</a>
 	</li>
-
+	{% else %}
+	<li>
+	    <a class="page-scroll" href="/entrance">Log in</a>
+	</li>
+	{% endif %}
 {% endblock %}
 
 {% block search %}

@@ -42,8 +42,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
-    'core',
-    'widget_tweaks',
+    'core', #name of my app
+    'widget_tweaks', # for managing the forms easier
+    'sitegate', # to enable the sign-in
+    'bootstrap3',
 )
 
 # we added the last 2 lines
@@ -141,11 +143,21 @@ STATICFILES_DIRS = (
     )
 
 # Lines below should be activated for Amazon Web Services
-
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_S3_FORCE_HTTP_URL = True
 AWS_QUERYSTRING_AUTH = False
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWSSecretKey')
 AWS_ACCESS_KEY_ID = os.environ.get('AWSAccessKeyId')
-
 AWS_STORAGE_BUCKET_NAME = 'onemonthpythongarconnet'
+
+
+# added for authentification
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages",
+"django.core.context_processors.request"
+)

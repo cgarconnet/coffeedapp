@@ -29,5 +29,12 @@ urlpatterns = patterns('',
 	url(r'location/(?P<pk>\d+)/review/create/$', coreviews.ReviewCreateView.as_view(), name = 'review_create'),
 	url(r'location/(?P<pk>\d+)/review/update/$', coreviews.ReviewUpdateView.as_view(), name = 'review_update'),
 
+
+	# Registering the entrance login page
+	url(r'entrance/$', coreviews.entrance),
+
+	# easy url to logout
+	url(r'^logout/$', 'django.contrib.auth.views.logout',{'next_page': '/entrance'})
+		# next page coulb be our /entrance
 )
 
