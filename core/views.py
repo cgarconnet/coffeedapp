@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView # to show details of my selec
 from django.views.generic.edit import CreateView, UpdateView # to enable the edit form (create and then edit)
 from sitegate.decorators import redirect_signedin, sitegate_view # for sitegate and authenficiation
 
+# from django.contrib.auth.decorators import user_passes_test
 
 import core.models as coremodels # we import our models
 	
@@ -55,6 +56,7 @@ class LocationCreateView(CreateView):
 	template_name = 'base/form.html'
 	fields ="__all__"
 
+# @user_passes_test(lambda u:u.is_staff, login_url='/entrance/')
 class LocationUpdateView(UpdateView):
 	model = coremodels.Location
 	template_name = 'base/form.html'

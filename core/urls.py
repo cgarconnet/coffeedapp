@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.auth.decorators import login_required # to block users who are not logged is so that cannot create
+from django.contrib.auth.decorators import login_required, permission_required # to block users who are not logged is so that cannot create
 # all url that we want to protect we add login_required()
 
 # from django.contrib import admin
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
 	# LocationCreateView isa name we defined in views.py in the Core folder
 
 
-	url(r'location/(?P<pk>\d+)/update/$', login_required(coreviews.LocationUpdateView.as_view()), name = 'location_update'),
+	url(r'location/(?P<pk>\d+)/update/$', permission_required('is_staff')(coreviews.LocationUpdateView.as_view()), name = 'location_update'),
 
 
 	#now the url to create and update a review
